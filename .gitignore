@@ -1,0 +1,13 @@
+##
+## This file has been automatically generated.
+## Any edit to this file will be lost on next update.
+## If you need to add static paths to the ignore list, please edit the createGitIgnore script.
+##
+## - TDP
+
+.classpath
+.project
+.settings
+*~
+
+target
