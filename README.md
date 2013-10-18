@@ -3,7 +3,7 @@ mapstore-migrator
 
 MapStore-Migrator is an application that manages MapStore's configuration migration between different versions.
 
-This application is Maven bases and runs in Windows and Unix systems using the mojo's appassembler-maven-plugin.
+This application is Maven based and runs in Windows and Unix systems using the mojo's appassembler-maven-plugin.
 
 In order to build and run MapStore-Migrator follow the steps below:
 
