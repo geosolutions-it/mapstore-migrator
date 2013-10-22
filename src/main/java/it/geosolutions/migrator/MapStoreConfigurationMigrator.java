@@ -35,9 +35,9 @@ import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import net.sf.json.JSONObject;
-import net.sf.json.JSONSerializer;
-
+import net.minidev.json.JSONObject;
+import net.minidev.json.parser.JSONParser;
+import net.minidev.json.parser.ParseException;
 
 /**
  * Simple application to manage MapStore's configuration migration between different version.
@@ -68,8 +68,9 @@ public class MapStoreConfigurationMigrator {
 	 * 
 	 * @param args
 	 * @throws IOException 
+	 * @throws ParseException 
 	 */
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException, ParseException {
         
 		loadConfiguration();
 		
@@ -118,7 +119,7 @@ public class MapStoreConfigurationMigrator {
 	    			LOGGER.log(Level.CONFIG, "MapStore configuration loaded: " + jsonData + "\n");
 	    		}
 	            
-	    		JSONObject json = migrate(jsonData);
+	    		JSONObject json = migrate(jsonData, id);
 	    		
 	    		if(json == null){
 	    			return;
@@ -144,16 +145,18 @@ public class MapStoreConfigurationMigrator {
 	/**
 	 * @param jsonData
 	 * @return JSONObject
+	 * @throws ParseException 
 	 */
-	private static JSONObject migrate(String jsonData) {
-		JSONObject json = (JSONObject)JSONSerializer.toJSON(jsonData);
+	private static JSONObject migrate(String jsonData, Long id) throws ParseException {
+		JSONParser parser = new JSONParser(JSONParser.MODE_RFC4627);
+		JSONObject json = (JSONObject)parser.parse(jsonData);
 		
         // //////////////////////////////////
         // Starting with migration
         // //////////////////////////////////
         
 		if (LOGGER.isLoggable(Level.INFO)) {
-			LOGGER.log(Level.INFO, "Starting configurations migration" + "\n");
+			LOGGER.log(Level.INFO, "Starting configurations migration with id: " + id + "\n");
 		}
         
         if(json.containsKey("scaleOverlayUnits")){
