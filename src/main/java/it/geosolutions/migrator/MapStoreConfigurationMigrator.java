@@ -58,7 +58,7 @@ public class MapStoreConfigurationMigrator {
 	
 	private static String password = null;
 	
-	private final static String mapStoreVersion = "1.3";
+	private final static String mapStoreVersion = "1.4";
 
 	/**
 	 * Main procedure that uses the GeoSolutions GeoStoreClient in order to perform REST 
@@ -189,6 +189,34 @@ public class MapStoreConfigurationMigrator {
         
         if(json.containsKey("customPanels")){
         	json.remove("customPanels");
+        }
+        
+        if(json.containsKey("modified")){
+        	json.remove("modified");
+        }
+        
+        if(json.containsKey("proxy")){
+        	json.remove("proxy");
+        }
+        
+        if(json.containsKey("geoStoreBaseURL")){
+        	json.remove("geoStoreBaseURL");
+        }
+        
+        if(json.containsKey("renderToTab")){
+        	json.remove("renderToTab");
+        }
+        
+        if(json.containsKey("advancedScaleOverlay")){
+        	json.remove("advancedScaleOverlay");
+        }
+        
+        if(json.containsKey("about")){
+        	json.remove("about");
+        }
+        
+        if(json.containsKey("defaultLanguage")){
+        	json.remove("defaultLanguage");
         }
         
         if(json.containsKey("map")){
